@@ -15,13 +15,8 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
-<<<<<<< HEAD
 *mvnw
 *.cmd
-=======
-*.cmd
-mvnw
->>>>>>> e52be08 (transport-1 add jpa)
 *.iws
 *.iml
 *.ipr
@@ -41,4 +36,3 @@ build/
 
 ### FIREBASE JSON ###
 *.json
-
