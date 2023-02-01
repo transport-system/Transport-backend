@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -23,9 +24,9 @@ public class City {
     @Column(name = "city_name")
     private String city;
 
-    @OneToOne(mappedBy = "city1", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Route route1;
+    @OneToMany(mappedBy = "city1", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Collection<Route> route1;
 
-    @OneToOne(mappedBy = "city2", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Route route2;
+    @OneToMany(mappedBy = "city2", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Collection<Route> route2;
 }

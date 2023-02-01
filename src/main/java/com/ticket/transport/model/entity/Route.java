@@ -21,11 +21,11 @@ public class Route {
     @Column(name = "route_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_arrival_id", referencedColumnName = "city_id")
     private City city1;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_departure_id", referencedColumnName = "city_id")
     private City city2;
 
