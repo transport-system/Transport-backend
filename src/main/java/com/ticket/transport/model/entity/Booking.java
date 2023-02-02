@@ -61,4 +61,8 @@ public class Booking {
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private Collection<FeedBack> feedBacks;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    private Account account;
 }

@@ -62,4 +62,10 @@ public class Account {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Collection<FeedBack> feedBacks;
+
+    @OneToMany(mappedBy = "account",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Collection<Booking> bookings;
 }
