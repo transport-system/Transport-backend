@@ -24,6 +24,7 @@ public class City {
     @Column(name = "city_name")
     private String city;
 
+
     @OneToMany(mappedBy = "city1", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Route> route1;
 

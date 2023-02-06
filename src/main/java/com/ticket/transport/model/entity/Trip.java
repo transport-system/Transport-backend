@@ -1,5 +1,7 @@
 package com.ticket.transport.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,27 +26,34 @@ public class Trip {
     @Column(name = "employee_name")
     private String employeeName;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     private double price;
 
     @Column(name = "trip_image")
     private String image;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "time_departure", nullable = false)
+    @Column(name = "time_departure")
     private Date timeDeparture;
 
-    @Column(name = "time_arrival", nullable = false)
+    @Column(name = "time_arrival")
     private Date timeArrival;
 
-    @Column(name = "number_seat", nullable = false)
+    @Column(name = "time_return")
+    private Date timeReturn;
+
+    @Column(name = "max_seat")
+    private int maxSeat;
+
+    @Column(name = "number_seat")
     private int numberSeat;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private String status;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "trip",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
@@ -52,13 +61,16 @@ public class Trip {
     private Collection<Vehicle> vehicles;
 
 
+    @JsonBackReference
     @ManyToOne(optional = false)
     @JoinColumn(name = "route_id", referencedColumnName = "route_id")
     private Route route;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "account_id")
+    @JsonManagedReference
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "company_id", referencedColumnName = "company_id")
     private Company company;
+
 
     @ManyToMany(mappedBy = "trips",
             cascade = CascadeType.ALL,

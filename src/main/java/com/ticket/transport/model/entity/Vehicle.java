@@ -1,5 +1,7 @@
 package com.ticket.transport.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +22,13 @@ public class Vehicle {
     @Column(name = "vehicle_id")
     private Long id;
 
-    @Column(name = "total_seat", nullable = false)
+    @Column(name = "total_seat")
     private int totalSeat;
 
-    @Column(name = "license_plates", nullable = false)
+    @Column(name = "license_plates")
     private String licensePlates;
 
+    @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_type_id", referencedColumnName = "vehicle_type_id")
     private VehicleType vehicleType;
@@ -34,6 +37,7 @@ public class Vehicle {
     @JoinColumn(name = "trip_id", referencedColumnName = "trip_id")
     private Trip trip;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Collection<FreeSeat> seats;
 }
