@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,16 +25,17 @@ public class VehicleType {
     @Column(name = "type_name")
     private String typeName;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "vehicles",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private Collection<Company> companies;
+    private List<Company> companies;
 
     @JsonBackReference
     @OneToMany(mappedBy = "vehicleType",
     cascade = CascadeType.ALL,
     orphanRemoval = true,
     fetch = FetchType.LAZY)
-    private Collection<Vehicle> vehicles;
+    private List<Vehicle> vehicles;
 
 }

@@ -31,20 +31,23 @@ public class Company {
     private double rating;
 
 
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "company_vehicle",
     joinColumns = @JoinColumn(name = "company_id", referencedColumnName = "company_id"),
     inverseJoinColumns = @JoinColumn(name = "vehicle_type_id", referencedColumnName = "vehicle_type_id")
     )
-    private Collection<VehicleType> vehicles;
+    private List<VehicleType> vehicles;
 
-    @JsonBackReference
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY
     ,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trip> trips;
 
+
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 }

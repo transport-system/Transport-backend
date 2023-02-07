@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,11 +34,12 @@ public class Vehicle {
     @JoinColumn(name = "vehicle_type_id", referencedColumnName = "vehicle_type_id")
     private VehicleType vehicleType;
 
+    @JsonBackReference
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id", referencedColumnName = "trip_id")
     private Trip trip;
 
     @JsonBackReference
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Collection<FreeSeat> seats;
+    private List<FreeSeat> seats;
 }

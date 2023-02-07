@@ -19,7 +19,7 @@ public class AccountRequest {
 
     private String lastName;
 
-    private String image;
+    private String avatarImage;
 
     private Date dateOfBirth;
 
@@ -29,7 +29,7 @@ public class AccountRequest {
 
     private String gender;
 
-    private String active;
+    private String status;
 
     private Long roleId;
 }

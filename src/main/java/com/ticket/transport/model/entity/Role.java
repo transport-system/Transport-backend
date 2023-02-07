@@ -1,12 +1,13 @@
 package com.ticket.transport.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,9 +24,9 @@ public class Role {
     @Column(name = "name")
     private String name;
 
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private Collection<Account> accounts;
+            cascade = CascadeType.ALL)
+    private List<Account> accounts;
 
 }

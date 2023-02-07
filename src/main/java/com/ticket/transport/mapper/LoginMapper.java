@@ -6,7 +6,9 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(config = ConfigurationMapper.class, componentModel="spring")
+@Mapper(componentModel = "spring",
+        config = ConfigurationMapper.class)
+
 public interface LoginMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     LoginResponse mapUserDetailsImplToLoginResponse(UserDetailsImpl userDetails);

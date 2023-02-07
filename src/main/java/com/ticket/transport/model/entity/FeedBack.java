@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Collection;
 import java.sql.Date;
+import java.util.List;
 
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
@@ -34,22 +35,26 @@ public class FeedBack {
     @Column(name = "status")
     private String status;
 
+
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "booking_id", referencedColumnName = "booking_id")
     private Booking booking;
 
+
     @JsonBackReference
     @OneToMany(mappedBy = "backFeedback", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<FeedBack> replies;
+    private List<FeedBack> replies;
+
+
 
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reply", referencedColumnName = "feedback_id")
     private FeedBack backFeedback;
 
-    //Dùng BackReference cho trường account để tránh lặp vô hạn
-    @JsonBackReference
+
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;

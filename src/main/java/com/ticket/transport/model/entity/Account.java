@@ -1,15 +1,14 @@
 package com.ticket.transport.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.sql.Date;
+import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -37,7 +36,7 @@ public class Account {
     private String lastName;
 
     @Column(name = "avatar_image")
-    private String image;
+    private String avatarImage;
 
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
@@ -51,35 +50,34 @@ public class Account {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "active")
-    private String active = "PENDING";
+    @Column(name = "status")
+    private String status = "PENDING";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-    @JsonBackReference
     private Role role;
 
-    //Dùng JsonManagedReference cho trường feedBacks để tránh lặp vô hạn
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "account",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Collection<FeedBack> feedBacks;
+    private List<FeedBack> feedBacks;
 
     @JsonBackReference
     @OneToMany(mappedBy = "account",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Collection<Booking> bookings;
+    private List<Booking> bookings;
+
 
     @JsonBackReference
-    @OneToMany(mappedBy = "account",
+    @OneToOne(mappedBy = "account",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Collection<Company> companies;
+    private Company company;
 
 
 }

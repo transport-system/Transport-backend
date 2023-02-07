@@ -5,6 +5,7 @@ import com.ticket.transport.model.entity.Account;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +17,11 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@Getter
+@Getter @Setter
 public class UserDetailsImpl implements UserDetails {
     private long id;
     private String username;
+
     @JsonIgnore
     private String password;
     private String firstName;
@@ -29,15 +31,15 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String phone;
     private String gender;
-    private String active;
+    private String status;
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(Account account) {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority(account.getRole().getName()));
         UserDetailsImpl userDetails = new UserDetailsImpl(account.getId(), account.getUsername(), account.getPassword(), account.getFirstName(),
-                account.getLastName(), account.getImage(), account.getDateOfBirth(), account.getEmail(),
-                account.getPhone(), account.getGender(), account.getActive(), authorityList);
+                account.getLastName(), account.getAvatarImage(), account.getDateOfBirth(), account.getEmail(),
+                account.getPhone(), account.getGender(), account.getStatus(), authorityList);
         return userDetails;
     }
 

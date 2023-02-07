@@ -1,6 +1,7 @@
 package com.ticket.transport.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,8 +33,8 @@ public class Route {
     private City city2;
 
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Collection<Trip> trips;
+    private List<Trip> trips;
 
 }

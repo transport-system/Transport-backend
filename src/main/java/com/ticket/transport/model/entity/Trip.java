@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Collection;
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -53,27 +54,28 @@ public class Trip {
     @Column(name = "status")
     private String status;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "trip",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
-    private Collection<Vehicle> vehicles;
+    private List<Vehicle> vehicles;
 
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne(optional = false)
     @JoinColumn(name = "route_id", referencedColumnName = "route_id")
     private Route route;
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne(optional = false)
     @JoinColumn(name = "company_id", referencedColumnName = "company_id")
     private Company company;
 
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "trips",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private Collection<Booking> bookings;
+    private List<Booking> bookings;
 }
