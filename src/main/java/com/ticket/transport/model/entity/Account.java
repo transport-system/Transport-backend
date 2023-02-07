@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -52,7 +52,7 @@ public class Account {
     private String gender;
 
     @Column(name = "active")
-    private String active;
+    private String active = "PENDING";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")

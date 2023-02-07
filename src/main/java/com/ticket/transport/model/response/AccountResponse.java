@@ -3,39 +3,32 @@ package com.ticket.transport.model.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ticket.transport.model.entity.Booking;
-import com.ticket.transport.model.entity.FeedBack;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.sql.Date;
 
-import java.util.Date;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 public class AccountResponse {
+    private Integer id;
     private String username;
-
-    private String password;
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer roleId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String roleName;
     private String firstName;
-
     private String lastName;
-
-    private String image;
-
-    private Date dateOfBirth;
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String avatarImage;
+    private Long dateOfBirth;
     private String email;
-
     private String phone;
-
     private String gender;
-
-    private String active;
-
-    private Long roleId;
-
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private BookingResponse bookings;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String status;
 }
